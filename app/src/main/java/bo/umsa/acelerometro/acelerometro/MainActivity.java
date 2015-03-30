@@ -19,6 +19,10 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
+
+    private long lastUpdate = 0;
+    private float last_x, last_y, last_z;
+    private static final int SHAKE_THRESHOLD = 600;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     }
 
     protected void onResume(){
-        
+        super.onResume();
+        senSensorManager.registerListener(this, senAccelerometer, senSensorManager.SENSOR_DELAY_NORMAL);
     }
 }
